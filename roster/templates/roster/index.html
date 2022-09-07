@@ -1,10 +1,34 @@
-<p>This is my page</p>
-{% if all_players %}
-<ul>
-	{% for player in all_players %}
-	<li>{{ player }}</li>
-	{% endfor %}
-</ul>
-{% else %}
-<p>No players are available.</p>
-{% endif %}
+<body>
+	<center>
+		<form method="post">
+			{% csrf_token %}
+			<p>These are the players</p>
+			{% if all_skaters %}
+
+			{% for player in all_skaters %}
+			{% if player.is_checked_in %}
+			<input type="checkbox" checked="checked" name="player" label="player{{ forloop.counter }}"
+				value="{{ player.id }}">{{player}}
+			{% else %}
+			<input type="checkbox" name="player" label="player{{ forloop.counter }}" value="{{ player.id }}">{{player}}
+			{% endif %}
+			{% endfor %}
+			{% else %}
+			<p>No players are available.</p>
+			{% endif %}
+			<p>These are the goalies</p>
+			{% if all_goalies %}
+			{% for player in all_goalies %}
+			{% if player.is_checked_in %}
+			<input type="checkbox" checked="checked" name="player" label="player{{ forloop.counter }}"
+				value="{{ player.id }}">{{player}}
+			{% else %}
+			<input type="checkbox" name="player" label="player{{ forloop.counter }}" value="{{ player.id }}">{{player}}
+			{% endif %}
+			{% endfor %}
+			{% else %}
+			<p>No goalies are available.</p>
+			{% endif %}
+		</form>
+	</center>
+</body>
