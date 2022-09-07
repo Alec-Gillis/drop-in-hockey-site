@@ -1,17 +1,18 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render
 
 from .models import Player
 
 
 def index(request):
-    all_players = Player.objects.all()
-    template = loader.get_template('roster/index.html')
+    all_skaters = Player.objects.filter(is_goalie=False)
+    all_goalies = Player.objects.filter(is_goalie=True)
+
     context = {
-        'all_players': all_players
+        'all_skaters': all_skaters,
+        'all_goalies': all_goalies,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'roster/index.html', context)
 
