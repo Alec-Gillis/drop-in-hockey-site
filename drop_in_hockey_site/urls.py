@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.urls import path, reverse_lazy
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
-    path('roster/', include('roster.urls')),
+    # redirects the index page to the roster
+    path('', RedirectView.as_view(url=reverse_lazy('roster:index'))),
+    path('roster/', include(('roster.urls', 'roster'), namespace='roster')),
     path('admin/', admin.site.urls),
 ]
