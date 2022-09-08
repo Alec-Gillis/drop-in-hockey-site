@@ -28,7 +28,7 @@ def index(request):
     while len(wait_list) and all_checked_in < 22:
         wait_list.first().update(is_checked_in=True) 
         wait_list = Player.objects.filter(is_goalie=False, is_substitute=True, is_checked_in=True).order_by('time_checked_in')
-    waiters = wait_list.order_by('name')
+    waiters = wait_list.order_by('time_checked_in')
 
     # Determine how many people need to sign out before next person is signed in
     signout_amount = 0
