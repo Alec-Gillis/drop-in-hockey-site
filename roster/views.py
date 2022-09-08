@@ -5,11 +5,9 @@ from .models import Player, HeaderText
 
 # Create your views here.
 def index(request):
-    all_skaters = Player.objects.filter(is_goalie=False, is_substitute=False)
+    all_skaters = Player.objects.filter(is_goalie=False, is_substitute=False).order_by('name')
     all_goalies = Player.objects.filter(is_goalie=True)
     all_subs = Player.objects.filter(is_substitute=True)
-    print(request.method)
-    print(request.POST)
     # when the user hits submit, this will update the db
     if request.method == "POST":
         everyone = Player.objects.all()

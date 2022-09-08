@@ -69,7 +69,7 @@
 			{% endif %}
 		</div>
 		<div class="main">
-			<div action="" method="post">
+			<form action="" method="post">
 				{% csrf_token %}
 				<!-- PLAYERS -->
 				<p>REGULARS</p>
@@ -80,7 +80,9 @@
 					<li>
 						<input type="checkbox" checked="checked" name="player" label="player{{ forloop.counter }}"
 							value="{{ player.id }}">{{player}}
-						{% else %}
+					</li>
+					{% else %}
+					<li>
 						<input type="checkbox" name="player" label="player{{ forloop.counter }}"
 							value="{{ player.id }}">{{player}}
 					</li>
@@ -131,8 +133,7 @@
 				{% endif %}
 				<br>
 				<button type="submit">Update Roster</button>
-				</form>
-			</div>
+			</form>
 		</div>
 		<div class="sidebar">
 			<!-- WAITLISt -->
