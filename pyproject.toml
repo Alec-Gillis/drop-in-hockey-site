@@ -8,7 +8,6 @@ authors = ["Alec Gillis <gillismail1213@gmail.com>"]
 python = "3.10.7"
 Django = "^4.1"
 gunicorn = "^20.1.0"
-whitenoise = "^6.2.0"
 dj-database-url = "^1.0.0"
 psycopg2-binary = "^2.9.3"
 python-decouple = "^3.6"
