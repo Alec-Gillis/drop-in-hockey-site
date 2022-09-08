@@ -8,13 +8,7 @@ def index(request):
     all_skaters = Player.objects.filter(is_goalie=False, is_substitute=False)
     all_goalies = Player.objects.filter(is_goalie=True)
     all_subs = Player.objects.filter(is_substitute=True)
-    headertext = HeaderText.objects.first()
-    context = {
-        'all_skaters': all_skaters,
-        'all_goalies': all_goalies,
-        'all_subs': all_subs,
-        'headertext': headertext,
-    }
+    
     if request.method == "POST":
         everyone = Player.objects.all()
         id_list = request.POST.getlist('player')
@@ -26,6 +20,19 @@ def index(request):
             player = Player.objects.filter(pk=int(x))
             if not player[0].is_checked_in:
                 player.update(is_checked_in=True, time_checked_in=str(timezone.now()))
+
+    waiters = {}
+    wait_list = Player.objects.filter(is_goalie=False, is_checked_in=True).order_by('time_checked_in')
+    if len(wait_list) > 1:
+        waiters = wait_list[1:]
+    headertext = HeaderText.objects.first()
+    context = {
+        'all_skaters': all_skaters,
+        'all_goalies': all_goalies,
+        'all_subs': all_subs,
+        'headertext': headertext,
+        'waiters': waiters,
+    }
 
     return render(request, 'roster/index.html', context)
 

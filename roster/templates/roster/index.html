@@ -21,6 +21,7 @@
 			<p>No players are available.</p>
 			{% endif %}
 			<!-- SUBSTITUTES -->
+			<p>There are the subs </p>
 			{% if all_subs %}
 			{% for player in all_subs %}
 			{% if player.is_checked_in %}
@@ -32,6 +33,19 @@
 			{% endfor %}
 			{% else %}
 			<p>No subs are available.</p>
+			{% endif %}
+			<!-- WAITLISt -->
+			{% if waiters %}
+			<p>WAITLIST</p>
+			<ol>
+				{% for player in waiters %}
+				<li>
+					<p>{{ player }}</p>
+				</li>
+				{% endfor %}
+			</ol>
+			{% else %}
+			<p>Nobody is on the waitlist yet.</p>
 			{% endif %}
 			<!-- GOALIES -->
 			<p>These are the goalies</p>
