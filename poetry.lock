@@ -32,17 +32,6 @@ tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)"
 tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "mypy (>=0.900,!=0.940)", "pytest-mypy-plugins", "cloudpickle"]
 
 [[package]]
-name = "backports.zoneinfo"
-version = "0.2.1"
-description = "Backport of the standard library zoneinfo module"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[package.extras]
-tzdata = ["tzdata"]
-
-[[package]]
 name = "colorama"
 version = "0.4.5"
 description = "Cross-platform colored terminal text."
@@ -60,7 +49,6 @@ python-versions = ">=3.8"
 
 [package.dependencies]
 asgiref = ">=3.5.2,<4"
-"backports.zoneinfo" = {version = "*", markers = "python_version < \"3.9\""}
 sqlparse = ">=0.2.2"
 tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 
@@ -165,14 +153,13 @@ python-versions = "*"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "3.8.10"
-content-hash = "ec8512ea3ee7880febe11129923c4910e6eb37f1737b4d0cdccb25f40a7955d9"
+python-versions = "3.10.4"
+content-hash = "bfa7f514a0c6cb566825f14a2e1032f3e15fed59f298550be3f173f11e721050"
 
 [metadata.files]
 asgiref = []
 atomicwrites = []
 attrs = []
-"backports.zoneinfo" = []
 colorama = []
 django = []
 more-itertools = []
