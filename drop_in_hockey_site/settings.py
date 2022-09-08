@@ -15,6 +15,16 @@ from pathlib import Path
 import dj_database_url
 from decouple import config
 import environ
+import sentry_sdk
+sentry_sdk.init(
+    dsn="https://55431162f21b4e99841d49e74d7c99e5@o1401269.ingest.sentry.io/6731655",
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0
+)
+
 environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
