@@ -71,6 +71,7 @@
 		<div class="main">
 			<form action="" method="post">
 				{% csrf_token %}
+				<button type="submit">Save Changes</button>
 				<!-- PLAYERS -->
 				<p>REGULARS</p>
 				{% if all_skaters %}
@@ -132,7 +133,6 @@
 				<p>No goalies are available.</p>
 				{% endif %}
 				<br>
-				<button type="submit">Update Roster</button>
 			</form>
 		</div>
 		<div class="sidebar">
