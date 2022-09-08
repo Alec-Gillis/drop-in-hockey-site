@@ -29,16 +29,16 @@ SECRET_KEY = config('SECRET_KEY')
 if 'SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ['SECRET_KEY']
 
-# SECURITY WARNING: don't run with debug turned on in production!
-if not IS_HEROKU:
-    DEBUG = False 
+
 
 # Generally avoid wildcards(*). However since Heroku router provides hostname validation it is ok
+ALLOWED_HOSTS= []
 if IS_HEROKU:
     ALLOWED_HOSTS = ['*']
-else:
-    ALLOWED_HOSTS= []
 
+# SECURITY WARNING: don't run with debug turned on in production!
+if not IS_HEROKU:
+    DEBUG = True
 
 # Application definition
 
