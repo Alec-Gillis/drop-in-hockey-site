@@ -1,39 +1,140 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>Hockey Sign-In</title>
+
+<style>
+	* {
+		background-color: aliceblue;
+	}
+
+	.header {
+		grid-area: header;
+		background-color: aliceblue;
+		position: sticky;
+		top: 0;
+	}
+
+	.footer {
+		grid-area: footer;
+		background-color: aliceblue;
+		position: sticky;
+		bottom: 0;
+		height: 50px;
+	}
+
+	.sidebar {
+		grid-area: sidebar;
+		background-color: gold;
+	}
+
+	.sidebar p {
+		background-color: gold;
+	}
+
+	.sidebar ol {
+		background-color: gold;
+	}
+
+	.main {
+		grid-area: main;
+		background-color: aliceblue;
+	}
+
+	.main li {
+		vertical-align: top;
+	}
+
+	.grid {
+		text-align: center;
+		display: grid;
+		grid-template-columns: 80% 20%;
+		grid-template-areas: "header sidebar"
+			"main sidebar"
+			"footer sidebar";
+	}
+
+	.sidebar {
+		position: sticky;
+		bottom: 50px;
+	}
+</style>
+
 <body>
-	<center>
-		<h1>Hockey Night in Hartland</h1>
-		{% if headertext %}
-		<h3>{{headertext.text}}</h3>
-		{% endif %}
-		<form action="" method="post">
-			{% csrf_token %}
-			<!-- PLAYERS -->
-			<p>These are the players</p>
-			{% if all_skaters %}
-			{% for player in all_skaters %}
-			{% if player.is_checked_in %}
-			<input type="checkbox" checked="checked" name="player" label="player{{ forloop.counter }}"
-				value="{{ player.id }}">{{player}}
-			{% else %}
-			<input type="checkbox" name="player" label="player{{ forloop.counter }}" value="{{ player.id }}">{{player}}
+	<div class="grid">
+		<div class="header">
+			<h1>Hockey Night in Hartland</h1>
+			{% if headertext %}
+			<h4>{{headertext.text}}</h4>
 			{% endif %}
-			{% endfor %}
-			{% else %}
-			<p>No players are available.</p>
-			{% endif %}
-			<!-- SUBSTITUTES -->
-			<p>There are the subs </p>
-			{% if all_subs %}
-			{% for player in all_subs %}
-			{% if player.is_checked_in %}
-			<input type="checkbox" checked="checked" name="player" label="player{{ forloop.counter }}"
-				value="{{ player.id }}">{{player}}
-			{% else %}
-			<input type="checkbox" name="player" label="player{{ forloop.counter }}" value="{{ player.id }}">{{player}}
-			{% endif %}
-			{% endfor %}
-			{% else %}
-			<p>No subs are available.</p>
-			{% endif %}
+		</div>
+		<div class="main">
+			<div action="" method="post">
+				{% csrf_token %}
+				<!-- PLAYERS -->
+				<p>REGULARS</p>
+				{% if all_skaters %}
+				<ul>
+					{% for player in all_skaters %}
+					{% if player.is_checked_in %}
+					<li>
+						<input type="checkbox" checked="checked" name="player" label="player{{ forloop.counter }}"
+							value="{{ player.id }}">{{player}}
+						{% else %}
+						<input type="checkbox" name="player" label="player{{ forloop.counter }}"
+							value="{{ player.id }}">{{player}}
+					</li>
+					<br>
+					{% endif %}
+					{% endfor %}
+				</ul>
+				{% else %}
+				<p>No players are available.</p>
+				{% endif %}
+				<!-- SUBSTITUTES -->
+				<p>SUBSTITUTES</p>
+				{% if all_subs %}
+				<ul>
+					{% for player in all_subs %}
+					<li>
+						{% if player.is_checked_in %}
+						<input type="checkbox" checked="checked" name="player" label="player{{ forloop.counter }}"
+							value="{{ player.id }}">{{player}}
+						{% else %}
+						<input type="checkbox" name="player" label="player{{ forloop.counter }}"
+							value="{{ player.id }}">{{player}}
+						{% endif %}
+					</li>
+					{% endfor %}
+				</ul>
+				{% else %}
+				<p>No subs are available.</p>
+				{% endif %}
+				<!-- GOALIES -->
+				<p>GOALIES</p>
+				{% if all_goalies %}
+				<ul>
+					{% for player in all_goalies %}
+					<li>
+						{% if player.is_checked_in %}
+						<input type="checkbox" checked="checked" name="player" label="player{{ forloop.counter }}"
+							value="{{ player.id }}">{{player}}
+						{% else %}
+						<input type="checkbox" name="player" label="player{{ forloop.counter }}"
+							value="{{ player.id }}">{{player}}
+						{% endif %}
+					</li>
+					{% endfor %}
+				</ul>
+				{% else %}
+				<p>No goalies are available.</p>
+				{% endif %}
+				<br>
+				<button type="submit">Update Roster</button>
+				</form>
+			</div>
+		</div>
+		<div class="sidebar">
 			<!-- WAITLISt -->
 			{% if waiters %}
 			<p>WAITLIST</p>
@@ -47,22 +148,10 @@
 			{% else %}
 			<p>Nobody is on the waitlist yet.</p>
 			{% endif %}
-			<!-- GOALIES -->
-			<p>These are the goalies</p>
-			{% if all_goalies %}
-			{% for player in all_goalies %}
-			{% if player.is_checked_in %}
-			<input type="checkbox" checked="checked" name="player" label="player{{ forloop.counter }}"
-				value="{{ player.id }}">{{player}}
-			{% else %}
-			<input type="checkbox" name="player" label="player{{ forloop.counter }}" value="{{ player.id }}">{{player}}
-			{% endif %}
-			{% endfor %}
-			{% else %}
-			<p>No goalies are available.</p>
-			{% endif %}
-			<br>
-			<button type="submit">Update Roster</button>
-		</form>
-	</center>
+
+		</div>
+		<div class="footer">Make any desired updates then click submit to confirm them.</div>
+	</div>
 </body>
+
+</html>

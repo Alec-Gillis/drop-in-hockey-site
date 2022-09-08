@@ -9,7 +9,7 @@ class Player(models.Model):
 	is_substitute = models.BooleanField(default=False)
 
 	def __str__(self):
-		return "{0} {1}".format(self.name, self.time_checked_in)
+		return self.name
 
 class HeaderText(models.Model):
 	"""
