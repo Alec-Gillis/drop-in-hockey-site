@@ -1,1 +1,1 @@
-web: gunicorn drop_in_hockey_site.wsgi
+web:gunicorn drop_in_hockey_site.wsgi
