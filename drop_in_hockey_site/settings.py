@@ -102,7 +102,7 @@ if not IS_HEROKU:
     }
 
 # Change this to true if you want to use local Sqlite
-if False:
+if True:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
