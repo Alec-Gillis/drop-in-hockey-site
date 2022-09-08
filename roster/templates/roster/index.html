@@ -2,9 +2,9 @@
 	<center>
 		<form action="" method="post">
 			{% csrf_token %}
+			<!-- PLAYERS -->
 			<p>These are the players</p>
 			{% if all_skaters %}
-
 			{% for player in all_skaters %}
 			{% if player.is_checked_in %}
 			<input type="checkbox" checked="checked" name="player" label="player{{ forloop.counter }}"
@@ -16,6 +16,20 @@
 			{% else %}
 			<p>No players are available.</p>
 			{% endif %}
+			<!-- SUBSTITUTES -->
+			{% if all_subs %}
+			{% for player in all_subs %}
+			{% if player.is_checked_in %}
+			<input type="checkbox" checked="checked" name="player" label="player{{ forloop.counter }}"
+				value="{{ player.id }}">{{player}}
+			{% else %}
+			<input type="checkbox" name="player" label="player{{ forloop.counter }}" value="{{ player.id }}">{{player}}
+			{% endif %}
+			{% endfor %}
+			{% else %}
+			<p>No subs are available.</p>
+			{% endif %}
+			<!-- GOALIES -->
 			<p>These are the goalies</p>
 			{% if all_goalies %}
 			{% for player in all_goalies %}
