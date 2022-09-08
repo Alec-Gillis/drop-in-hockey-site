@@ -9,3 +9,9 @@ class Player(models.Model):
 
 	def __str__(self):
 		return self.name
+
+class HeaderText(models.Model):
+	"""
+	Used as the header text so that any site admin can change what the header says
+	"""
+	text = models.TextField()

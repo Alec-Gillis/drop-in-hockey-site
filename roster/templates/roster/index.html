@@ -1,5 +1,9 @@
 <body>
 	<center>
+		<h1>Hockey Night in Hartland</h1>
+		{% if headertext %}
+		<h3>{{headertext.text}}</h3>
+		{% endif %}
 		<form action="" method="post">
 			{% csrf_token %}
 			<!-- PLAYERS -->
@@ -43,6 +47,7 @@
 			{% else %}
 			<p>No goalies are available.</p>
 			{% endif %}
+			<br>
 			<button type="submit">Update Roster</button>
 		</form>
 	</center>
