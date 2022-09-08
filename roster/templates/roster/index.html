@@ -1,6 +1,6 @@
 <body>
 	<center>
-		<form method="post">
+		<form action="" method="post">
 			{% csrf_token %}
 			<p>These are the players</p>
 			{% if all_skaters %}
@@ -29,6 +29,7 @@
 			{% else %}
 			<p>No goalies are available.</p>
 			{% endif %}
+			<button type="submit">Update Roster</button>
 		</form>
 	</center>
 </body>
