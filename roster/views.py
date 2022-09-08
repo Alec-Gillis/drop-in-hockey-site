@@ -23,8 +23,8 @@ def index(request):
 
     waiters = {}
     wait_list = Player.objects.filter(is_goalie=False, is_checked_in=True).order_by('time_checked_in')
-    if len(wait_list) > 1:
-        waiters = wait_list[1:]
+    if len(wait_list) > 22:
+        waiters = wait_list[22:]
     headertext = HeaderText.objects.first()
     context = {
         'all_skaters': all_skaters,
