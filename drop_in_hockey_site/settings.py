@@ -89,16 +89,17 @@ WSGI_APPLICATION = 'drop_in_hockey_site.wsgi.application'
 
 MAX_CONN_AGE = 600
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT':  config('DB_PORT'),
+if not IS_HEROKU:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT':  config('DB_PORT'),
+        }
     }
-}
 
 # Change this to true if you want to use local Sqlite
 if False:
