@@ -14,6 +14,8 @@ import os
 from pathlib import Path
 import dj_database_url
 from decouple import config
+import environ
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,11 +26,11 @@ IS_HEROKU = "DYNO" in os.environ
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
-if 'SECRET_KEY' in os.environ:
-    SECRET_KEY = os.environ['SECRET_KEY']
-else:
+print(os.environ) 
+if not IS_HEROKU:
     SECRET_KEY = config('SECRET_KEY')
+else:
+    SECRET_KEY = os.environ['SECRET_KEY']
 
 # Generally avoid wildcards(*). However since Heroku router provides hostname validation it is ok
 ALLOWED_HOSTS= []
