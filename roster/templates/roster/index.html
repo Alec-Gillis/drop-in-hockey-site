@@ -138,7 +138,7 @@
 		<div class="sidebar">
 			<!-- WAITLISt -->
 			{% if waiters %}
-			<p>WAITLIST</p>
+			<p>WAITLIST. {{signout_amount}} more person(s) needs to sign out before the next skate is checked in</p>
 			<ol>
 				{% for player in waiters %}
 				<li>
