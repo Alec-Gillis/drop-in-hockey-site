@@ -22,12 +22,14 @@ def index(request):
                 player.update(is_checked_in=True, time_checked_in=str(timezone.now()))
 
     waiters = {}
-    checked_in_waiters = Player.objects.filter(is_goalie=False, is_substitute=True, is_checked_in=True)
-    all_checked_in = len(checked_in_waiters) + len(all_skaters.filter(is_checked_in=True))
+    # regulars that are playing
+    people_playing = Player.objects.filter(is_goalie=False, is_substitute=False, is_checked_in=True)
+    # wait list
     wait_list = Player.objects.filter(is_goalie=False, is_substitute=True, is_checked_in=True).order_by('time_checked_in')
-    while len(wait_list) and all_checked_in < 22:
-        wait_list.first().update(is_checked_in=True) 
-        wait_list = Player.objects.filter(is_goalie=False, is_substitute=True, is_checked_in=True).order_by('time_checked_in')
+    while len(wait_list) and len(people_playing) < 22:
+        remove_player = wait_list.first() 
+        people_playing |= Player.objects.filter(pk=remove_player.id)
+        wait_list = wait_list.exclude(pk=int(remove_player.id))
     waiters = wait_list.order_by('time_checked_in')
 
     # Determine how many people need to sign out before next person is signed in
